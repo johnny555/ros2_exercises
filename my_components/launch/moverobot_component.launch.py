@@ -15,6 +15,11 @@ def generate_launch_description():
                     package='my_components',
                     plugin='my_components::MoveRobot',
                     name='moverobot'),
+                ComposableNode(
+                    package='my_components',
+                    plugin='my_components::OdomComponent',
+                    name='odom_component'
+                )
             ],
             output='screen',
     )

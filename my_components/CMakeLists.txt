@@ -21,6 +21,8 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(composition REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -48,8 +50,23 @@ rclcpp_components_register_nodes(moverobot_component "my_components::MoveRobot")
 set(node_plugins "${node_plugins}my_components::MoveRobot;$<TARGET_FILE:moverobot_component>\n")
 
 
+add_library(odom_component SHARED src/odom_component.cpp)
+target_compile_definitions(odom_component PRIVATE "COMPOSITION_BUILDING_DLL")
+
+ament_target_dependencies(odom_component
+  "rclcpp"
+  "rclcpp_components"
+  "nav_msgs")
+
+rclcpp_components_register_nodes(odom_component "my_components::OdomComponent")
+
+set(node_plugins "${node_plugins}my_components::OdomComponent;$<TARGET_FILE:odom_component>\n")
+
+
+
 install(TARGETS
   moverobot_component
+  odom_component
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin)
