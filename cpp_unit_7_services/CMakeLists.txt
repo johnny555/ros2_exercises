@@ -20,6 +20,7 @@ find_package(ament_cmake REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(gazebo_msgs REQUIRED)
+find_package(std_srvs REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -32,12 +33,16 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-
+add_executable(empty_service_server src/empty_service_server.cpp)
 add_executable(cpp_simple_service_client src/cpp_simple_service_client.cpp)
+
 ament_target_dependencies(cpp_simple_service_client rclcpp std_msgs gazebo_msgs)
+ament_target_dependencies(empty_service_server rclcpp std_msgs std_srvs)
+
 
 install(TARGETS
    cpp_simple_service_client
+   empty_service_server
    DESTINATION lib/${PROJECT_NAME}
  )
 
