@@ -24,7 +24,6 @@ find_package(std_srvs REQUIRED)
 find_package(unit_8_services_custom_msgs REQUIRED) # We add the package with the custom service interface as a dependency
 
 
-
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
@@ -35,40 +34,29 @@ if(BUILD_TESTING)
   #set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-include_directories(include)
 
 add_executable(empty_service_server src/empty_service_server.cpp)
 add_executable(cpp_simple_service_client src/cpp_simple_service_client.cpp)
-add_executable(square_server src/square_server.cpp)
 
-add_library(move_bb8 SHARED
-	src/move_bb8.cpp
-)
 
 
 add_executable(custom_service_server_node src/custom_service_server.cpp)
 ament_target_dependencies(custom_service_server_node rclcpp std_msgs std_srvs unit_8_services_custom_msgs)
 
 add_executable(custom_service_client_node src/custom_service_client.cpp)
-ament_target_dependencies(custom_service_client_node rclcpp std_msgs std_srvs unit_8_services_custom_msgs)
+ament_target_dependencies(custom_service_client_node 
+	rclcpp std_msgs std_srvs unit_8_services_custom_msgs)
 
 
-ament_export_libraries(move_bb8)
 
 
 ament_target_dependencies(cpp_simple_service_client rclcpp std_msgs gazebo_msgs)
 ament_target_dependencies(empty_service_server rclcpp std_msgs std_srvs)
-ament_target_dependencies(square_server 
-gazebo_msgs rclcpp std_msgs std_srvs geometry_msgs )
 
-ament_target_dependencies(move_bb8 rclcpp std_msgs std_srvs geometry_msgs)
-
-target_link_libraries(square_server move_bb8 std_msgs std_srvs geometry_msgs)
 
 install(TARGETS
    cpp_simple_service_client
    empty_service_server
-   square_server
    custom_service_server_node 
    custom_service_client_node 
    DESTINATION lib/${PROJECT_NAME}
@@ -79,9 +67,6 @@ install(DIRECTORY
  launch
  DESTINATION share/${PROJECT_NAME}/
 )
-
-install(DIRECTORY include/
-        DESTINATION include)
 
 
 ament_package()

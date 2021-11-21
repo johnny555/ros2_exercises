@@ -1,21 +1,19 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>cpp_unit_7_services</name>
+  <name>move_bb8_service</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="badwolf.johnnyv@gmail.com">user</maintainer>
+  <maintainer email="user@todo.todo">user</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>std_msgs</depend>
   <depend>rclcpp</depend>
-  <depend>gazebo_msgs</depend>
+  <depend>std_msgs</depend>
   <depend>std_srvs</depend>
-  <depend>move_bb8_service</depend>
-
- <depend>unit_8_services_custom_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>gazebo_msgs</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
