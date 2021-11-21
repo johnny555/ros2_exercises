@@ -21,6 +21,9 @@ find_package(std_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(gazebo_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
+find_package(unit_8_services_custom_msgs REQUIRED) # We add the package with the custom service interface as a dependency
+
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -43,6 +46,13 @@ add_library(move_bb8 SHARED
 )
 
 
+add_executable(custom_service_server_node src/custom_service_server.cpp)
+ament_target_dependencies(custom_service_server_node rclcpp std_msgs std_srvs unit_8_services_custom_msgs)
+
+add_executable(custom_service_client_node src/custom_service_client.cpp)
+ament_target_dependencies(custom_service_client_node rclcpp std_msgs std_srvs unit_8_services_custom_msgs)
+
+
 ament_export_libraries(move_bb8)
 
 
@@ -59,6 +69,8 @@ install(TARGETS
    cpp_simple_service_client
    empty_service_server
    square_server
+   custom_service_server_node 
+   custom_service_client_node 
    DESTINATION lib/${PROJECT_NAME}
  )
 
