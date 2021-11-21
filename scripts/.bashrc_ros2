@@ -3,3 +3,5 @@ export ROS_DISTRO=foxy
 source /opt/ros/$ROS_DISTRO/setup.bash
 source /home/user/ros2_ws/install/local_setup.bash
 source /home/simulations/ros2_sims_ws/install/setup.bash
+git config --global user.name "John Vial"
+git config --global user.email "badwolf.johnnyv@gmail.com"

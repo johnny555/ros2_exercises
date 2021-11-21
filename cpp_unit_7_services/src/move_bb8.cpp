@@ -20,7 +20,7 @@ MoveBB8_ROS2::MoveBB8_ROS2(std::shared_ptr<rclcpp::Node> node) {
 
   // ROS Publishers
   this->pub_cmd_vel_ =
-      this->node_->create_publisher<geometry_msgs::msg::Twist>("/cmd_vel");
+      this->node_->create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 10);
 }
 
 MoveBB8_ROS2::~MoveBB8_ROS2(void) {}
